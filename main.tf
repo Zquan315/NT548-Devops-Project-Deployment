@@ -8,35 +8,40 @@ module "vpc_module" {
   subnet_count_value       = var.vpc_subnet_count_value
 }
 
-# # Create Nat Gateway
-# module "nat_gateway_module" {
-#   source = "../modules/nat_gateway_module"
-#   # Allocate an Elastic IP
-#   nat_gateway_allocation_id = module.nat_gateway_module.nhom16_nat_gateway_allocation_id
-#   # NAT Gateway
-#   nat_gateway_subnet_id       = module.vpc_module.nhom16_subnet_public_id
-#   region_network_border_group = var.region_value
-# }
+# Create Nat Gateway
+module "nat_gateway_module" {
+  source = "./modules/nat_gateway_module"
+  # Allocate an Elastic IP
+  nat_gateway_allocation_id_zone_a = module.nat_gateway_module.nhom16_nat_gateway_allocation_id_zone_a
+  nat_gateway_allocation_id_zone_b = module.nat_gateway_module.nhom16_nat_gateway_allocation_id_zone_b
+  # NAT Gateway
+  nat_gateway_subnet_id_zone_a       = module.vpc_module.nhom16_subnet_public_ids[0]
+  nat_gateway_subnet_id_zone_b       = module.vpc_module.nhom16_subnet_public_ids[1]
+  region_network_border_group = var.region_value
+}
 
-# # create route table
-# module "route_table_module" {
-#   source = "../modules/route_table_module"
+# create route table
+module "route_table_module" {
+  source = "./modules/route_table_module"
 
-#   # Route Table
-#   vpc_id_value = module.vpc_module.nhom16_vpc_id
+  # Route Table
+  vpc_id_value = module.vpc_module.nhom16_vpc_id
 
-#   # Route Table Private
-#   route_table_private_id         = module.route_table_module.nhom16_route_table_private_id
-#   destination_cidr_block_private = var.destination_cidr_block_private_value
-#   gateway_id_private             = module.nat_gateway_module.nhom16_nat_gateway_id
-#   subnet_id_private              = module.vpc_module.nhom16_subnet_private_id
+  # Route Table Private
+  route_table_private_id         = module.route_table_module.nhom16_route_table_private_id
+  destination_cidr_block_private = var.destination_cidr_block_private_value
+  gateway_id_private             = [module.nat_gateway_module.nhom16_nat_gateway_id_zone_a, 
+                                    module.nat_gateway_module.nhom16_nat_gateway_id_zone_b]
+  subnet_id_private              = [module.vpc_module.nhom16_subnet_private_ids[0], 
+                                    module.vpc_module.nhom16_subnet_private_ids[1]]
 
-#   # Route Table Public
-#   route_table_public_id         = module.route_table_module.nhom16_route_table_public_id
-#   destination_cidr_block_public = var.destination_cidr_block_public_value
-#   gateway_id_public             = module.vpc_module.nhom16_internet_gateway_id
-#   subnet_id_public              = module.vpc_module.nhom16_subnet_public_id
-# }
+  # Route Table Public
+  route_table_public_id         = module.route_table_module.nhom16_route_table_public_id
+  destination_cidr_block_public = var.destination_cidr_block_public_value
+  gateway_id_public             = module.vpc_module.nhom16_internet_gateway_id
+  subnet_id_public              = [module.vpc_module.nhom16_subnet_public_ids[0], 
+                                  module.vpc_module.nhom16_subnet_public_ids[1]]
+}
 
 # # Create Security Groups
 # module "security_group_module" {

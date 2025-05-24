@@ -12,6 +12,7 @@ resource "aws_subnet" "nhom16_subnet_private" {
     count = var.subnet_count_value
     vpc_id = aws_vpc.nhom16_vpc.id
     cidr_block = var.cidr_block_private_value[count.index]
+    availability_zone = var.availability_zone_private_value[count.index]
     map_public_ip_on_launch = var.map_public_ip_on_launch_private_value
     tags = {
         Name = "nhom16-subnet-private-${count.index}"
@@ -21,7 +22,8 @@ resource "aws_subnet" "nhom16_subnet_private" {
 resource "aws_subnet" "nhom16_subnet_public" {
     count = var.subnet_count_value
     vpc_id = aws_vpc.nhom16_vpc.id
-    cidr_block = var.cidr_block_public_value[count.index] 
+    cidr_block = var.cidr_block_public_value[count.index]
+    availability_zone = var.availability_zone_public_value[count.index] 
     map_public_ip_on_launch = var.map_public_ip_on_launch_public_value
     tags = {
         Name = "nhom16-subnet-public-${count.index}"

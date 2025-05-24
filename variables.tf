@@ -29,20 +29,20 @@ variable "vpc_subnet_count_value" {
   type        = number
   
 }
-# #route table
+#route table
 
-# variable "destination_cidr_block_private_value" {
-#   description = "The destination CIDR block for the private route."
-#   type        = string
-# }
+variable "destination_cidr_block_private_value" {
+  description = "The destination CIDR block for the private route."
+  type        = string
+}
 
-# variable "destination_cidr_block_public_value" {
-#   description = "The destination CIDR block for the public route."
-#   type        = string
-# }
+variable "destination_cidr_block_public_value" {
+  description = "The destination CIDR block for the public route."
+  type        = string
+}
 
 
-# # variables for security group
+# variables for security group
 # variable "from_port_in_private_value" {
 #   description = "The starting port for ingress rules in the private security group."
 #   type        = number

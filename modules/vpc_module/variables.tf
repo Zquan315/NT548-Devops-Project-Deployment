@@ -40,3 +40,14 @@ variable "map_public_ip_on_launch_public_value" {
     type        = bool
     default     = true
 }
+
+variable "availability_zone_private_value" {
+    description = "The availability zones for the private subnets."
+    type        = list(string)
+    default     = ["us-east-1a", "us-east-1b"]
+}
+variable "availability_zone_public_value" {
+    description = "The availability zones for the public subnets."
+    type        = list(string)
+    default     = ["us-east-1a", "us-east-1b"]
+}

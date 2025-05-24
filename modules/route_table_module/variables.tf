@@ -25,7 +25,7 @@ variable "destination_cidr_block_public" {
 
 variable "gateway_id_private" {
   description = "The ID of the gateway for the private route"
-  type        = string
+  type        = list(string)
 }
 
 variable "gateway_id_public" {
@@ -35,7 +35,7 @@ variable "gateway_id_public" {
 
 variable "subnet_id_private" {
   description = "The ID of the private subnet to associate with the private route table"
-  type        = string
+  type        = list(string)
 }
 variable "subnet_id_public" {
   description = "The ID of the public subnet to associate with the public route table"
