@@ -1,23 +1,15 @@
-variable "nat_gateway_allocation_id_zone_a" {
+variable "nat_gateway_allocation_id" {
   description = "The allocation ID of the Elastic IP address for the NAT gateway."
   type        = string
 }
 
-variable "nat_gateway_allocation_id_zone_b" {
-  description = "The allocation ID of the Elastic IP address for the NAT gateway."
-  type        = string
-}
 
-variable "nat_gateway_subnet_id_zone_a" {
+variable "nat_gateway_subnet_id" {
   description = "The subnet ID where the NAT gateway will be deployed."
   type        = string
 }
 
-variable "nat_gateway_subnet_id_zone_b" {
-  description = "The subnet ID where the NAT gateway will be deployed."
-  type        = string
-  
-}
+
 
 variable "nat_gateway_connectivity_type" {
   description = "The connectivity type for the NAT gateway. Can be either 'public' or 'private'."
