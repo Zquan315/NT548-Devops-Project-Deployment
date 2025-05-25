@@ -1,5 +1,5 @@
 region_value  = "us-east-1"
-profile_value = "quantc" #tài khoản ai người đó sử dụng 
+profile_value = "" #tài khoản ai người đó sử dụng 
 
 # VPC
 vpc_cidr_block_value         = "172.16.0.0/16"
@@ -55,7 +55,17 @@ ingress_rules_public_value = [
   }
 ]
 
+# S3 bucket
+s3_bucket_name_value = "nhom16-app-student-bucket-22521190"
 
+# IAM
+ec2_role_name_value = "nhom16_ec2_role"
+code_deploy_role_name_value = "nhom16_codeDeploy_role"
+nhom16_user_name_value = "nhom16_user"
+
+# CodeCommit repository
+repository_name_value        = "nhom16-app-student-repo"
+repository_description_value = "Repository for Nhom16 App Student"
 # # EC2 instance
 # ami_id_value = "ami-0e449927258d45bc4" # amazon linux 2023 ami
 # instance_type_value = "t2.micro"

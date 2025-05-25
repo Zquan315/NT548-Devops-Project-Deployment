@@ -72,6 +72,39 @@ variable "ingress_rules_public_value" {
   
 }
 
+# variables for s3 bucket
+variable "s3_bucket_name_value" {
+  description = "The name of the S3 bucket to create."
+  type        = string
+  
+}
+
+# IAM
+variable "ec2_role_name_value" {
+  description = "Name of the IAM role for EC2 instances"
+  type        = string
+}
+
+variable "code_deploy_role_name_value" {
+  description = "Name of the IAM role for CodeDeploy"
+  type        = string
+}
+
+variable "nhom16_user_name_value" {
+  description = "Name of the IAM user"
+  type        = string
+}
+
+# variables for codeCommit repository
+variable "repository_name_value" {
+  description = "Name of the CodeCommit repository"
+  type        = string
+}
+variable "repository_description_value" {
+  description = "Description of the CodeCommit repository"
+  type        = string
+}
+
 # # variables for ec2 instance
 # variable "ami_id_value" {
 #   type        = string

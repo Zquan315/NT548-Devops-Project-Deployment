@@ -57,6 +57,29 @@ module "security_group_module" {
 
 }
 
+# Create S3 bucket
+module "s3_module" {
+  source = "./modules/s3_module"
+  bucket_name_value         = var.s3_bucket_name_value
+  bucket_name_id_value      = module.s3_module.nhom16-app_student_bucket_id
+}
+
+# Create IAM 
+module "iam_module" {
+  source = "./modules/iam_module"
+  ec2_role_name = var.ec2_role_name_value
+  code_deploy_role_name = var.code_deploy_role_name_value
+  # IAM User
+  nhom16_user_name = var.nhom16_user_name_value
+}
+
+# Create CodeCommit repository
+module "codeCommit_module" {
+  source = "./modules/codeCommit_module"
+  repository_name        = var.repository_name_value
+  repository_description = var.repository_description_value
+}
+
 # # Create EC2 instances
 # module "ec2_instance_module" {
 #   source              = "../modules/ec2_module"
