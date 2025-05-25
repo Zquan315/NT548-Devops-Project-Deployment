@@ -23,13 +23,17 @@ resource "aws_security_group" "nhom16_security_group_public" {
   tags = {
     Name = "nhom16_security_group_public"
   }
-  ingress {
-      from_port       = var.from_port_in_public
-      to_port         = var.to_port_in_public
-      protocol        = var.protocol_in_public
-      cidr_blocks     = var.cidr_blocks_in_public
-
+  dynamic "ingress" {
+    for_each = var.ingress_rules_public
+    content {
+      from_port   = ingress.value.from_port
+      to_port     = ingress.value.to_port
+      protocol    = ingress.value.protocol
+      cidr_blocks = ingress.value.cidr_blocks
+      description = ingress.value.description != null ? ingress.value.description : ""
+    }
   }
+
   egress {
     from_port   = var.from_port_e_public
     to_port     = var.to_port_e_public

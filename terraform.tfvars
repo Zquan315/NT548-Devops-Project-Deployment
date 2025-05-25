@@ -11,16 +11,50 @@ vpc_subnet_count_value = 2
 destination_cidr_block_private_value = "0.0.0.0/0"
 destination_cidr_block_public_value  = "0.0.0.0/0"
 
-# #security group private
-# from_port_in_private_value = 22
-# to_port_in_private_value   = 22
-# protocol_in_private_value  = "tcp"
+#security group private
+from_port_in_private_value = 22
+to_port_in_private_value   = 22
+protocol_in_private_value  = "tcp"
 
-# #security group public
-# from_port_in_public_value = 22
-# to_port_in_public_value   = 22
-# protocol_in_public_value  = "tcp"
-# cidr_blocks_in_public_value = ["125.212.175.47/32"] # My IP address
+#security group public
+ingress_rules_public_value = [
+  {
+    from_port   = 22
+    to_port     = 22
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "SSH access from anywhere"
+  },
+  {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTP access from anywhere"
+  },
+  {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "HTTPS access from anywhere"
+  },
+  {
+    from_port   = 3000
+    to_port     = 3000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Access to port 3000 from anywhere for Client - frontend"
+  },
+  {
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+    description = "Access to port 5000 from anywhere for Server - backend"
+  }
+]
+
 
 # # EC2 instance
 # ami_id_value = "ami-0e449927258d45bc4" # amazon linux 2023 ami

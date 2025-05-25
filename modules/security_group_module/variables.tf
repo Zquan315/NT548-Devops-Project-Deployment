@@ -48,24 +48,17 @@ variable "cidr_blocks_e_private" {
 }
 
 #public security group
-variable "from_port_in_public" {
-  description = "The starting port for the ingress rule"
-  type        = number
-}
-
-variable "to_port_in_public" {
-  description = "The ending port for the ingress rule"
-  type        = number
-}
-
-variable "protocol_in_public" {
-  description = "The protocol for the ingress rule"
-  type        = string
-}
-
-variable "cidr_blocks_in_public" {
-  description = "The CIDR blocks for the ingress rule"
-  type        = list(string)
+variable "ingress_rules_public" {
+  description = "List of ingress rules for the public security group"
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+    description = optional(string, "")
+  }))
+  default = []
+  
 }
 
 variable "from_port_e_public" {

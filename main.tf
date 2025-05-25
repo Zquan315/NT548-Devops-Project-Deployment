@@ -41,24 +41,21 @@ module "route_table_module" {
                                   module.vpc_module.nhom16_subnet_public_ids[1]]
 }
 
-# # Create Security Groups
-# module "security_group_module" {
-#   source = "../modules/security_group_module"
-#   vpc_id = module.vpc_module.nhom16_vpc_id
-#   # Security Group Private ingress
+# Create Security Groups
+module "security_group_module" {
+  source = "./modules/security_group_module"
+  vpc_id = module.vpc_module.nhom16_vpc_id
+  # Security Group Private ingress
 
-#   from_port_in_private = var.from_port_in_private_value
-#   to_port_in_private   = var.to_port_in_private_value
-#   protocol_in_private  = var.protocol_in_private_value
-#   public_security_group_id =  module.security_group_module.nhom16_security_group_public_id
+  from_port_in_private = var.from_port_in_private_value
+  to_port_in_private   = var.to_port_in_private_value
+  protocol_in_private  = var.protocol_in_private_value
+  public_security_group_id =  module.security_group_module.nhom16_security_group_public_id
 
-#   # Security Group Public ingress
-#   from_port_in_public   = var.from_port_in_public_value
-#   to_port_in_public     = var.to_port_in_public_value
-#   protocol_in_public    = var.protocol_in_public_value
-#   cidr_blocks_in_public = var.cidr_blocks_in_public_value
+  # Security Group Public ingress
+  ingress_rules_public = var.ingress_rules_public_value
 
-# }
+}
 
 # # Create EC2 instances
 # module "ec2_instance_module" {

@@ -43,41 +43,34 @@ variable "destination_cidr_block_public_value" {
 
 
 # variables for security group
-# variable "from_port_in_private_value" {
-#   description = "The starting port for ingress rules in the private security group."
-#   type        = number
-# }
+variable "from_port_in_private_value" {
+  description = "The starting port for ingress rules in the private security group."
+  type        = number
+}
 
-# variable "to_port_in_private_value" {
-#   description = "The ending port for ingress rules in the private security group."
-#   type        = number
-# }
+variable "to_port_in_private_value" {
+  description = "The ending port for ingress rules in the private security group."
+  type        = number
+}
 
-# variable "protocol_in_private_value" {
-#   description = "The protocol for ingress rules in the private security group."
-#   type        = string
-# }
+variable "protocol_in_private_value" {
+  description = "The protocol for ingress rules in the private security group."
+  type        = string
+}
 
 
-# variable "from_port_in_public_value" {
-#   description = "The starting port for ingress rules in the public security group."
-#   type        = number
-# }
-
-# variable "to_port_in_public_value" {
-#   description = "The ending port for ingress rules in the public security group."
-#   type        = number
-# }
-
-# variable "protocol_in_public_value" {
-#   description = "The protocol for ingress rules in the public security group."
-#   type        = string
-# }
-
-# variable "cidr_blocks_in_public_value" {
-#   description = "The CIDR blocks for ingress rules in the public security group."
-#   type        = list(string)
-# }
+variable "ingress_rules_public_value" {
+  description = "List of ingress rules for the public security group."
+  type = list(object({
+    from_port   = number
+    to_port     = number
+    protocol    = string
+    cidr_blocks = list(string)
+    description = optional(string, "")
+  }))
+  default = []
+  
+}
 
 # # variables for ec2 instance
 # variable "ami_id_value" {
