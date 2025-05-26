@@ -6,7 +6,7 @@ resource "aws_instance" "nhom16_ec2_public" {
   vpc_security_group_ids      = var.security_group_id_public
   key_name                    = var.key_name
   tags = {
-    Name = "nhom16_ec2_public"
+    Name = var.ec2_tag_name
   }
   iam_instance_profile        = var.ec2_instance_profile_name   
   root_block_device {

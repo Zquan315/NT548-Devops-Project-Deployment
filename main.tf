@@ -90,6 +90,18 @@ module "ec2_instance_module" {
   security_group_id_public    = [module.security_group_module.nhom16_security_group_public_id]
   volume_size                 = var.volume_size_value
   volume_type                 = var.volume_type_value 
+  ec2_tag_name                = var.ec2_tag_name_value 
   # eip
   region_network_border_group = var.region_value
+}
+
+# Create CodeDeploy application and deployment group
+module "codeDeploy_module" {
+  source = "./modules/codeDeploy_module"
+  code_deploy_app_name        = var.code_deploy_app_name_value
+  compute_platform            = var.compute_platform_value
+  deployment_group_name       = var.deployment_group_name_value
+  code_deploy_role_arn        = module.iam_module.nhom16_codeDeploy_role_arn
+  ec2_tag_value               = var.ec2_tag_name_value
+  deployment_option           = var.deployment_option_value
 }

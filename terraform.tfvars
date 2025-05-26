@@ -76,3 +76,10 @@ instance_type_value = "t3.medium" # t3.medium instance type
 key_name_value = "nhom16" # my key pair name
 volume_size_value = 20
 volume_type_value = "gp2" # General Purpose SSD (gp2) volume type
+ec2_tag_name_value = "nhom16_ec2_public"
+
+# CodeDeploy application and deployment group
+code_deploy_app_name_value = "nhom16_code_deploy_app"
+compute_platform_value = "Server" 
+deployment_group_name_value = "nhom16_code_deploy_deployment_group"
+deployment_option_value = "WITHOUT_TRAFFIC_CONTROL" # "WITH_TRAFFIC_CONTROL" - loadbalancer or "WITHOUT_TRAFFIC_CONTROL" - no loadbalancer
