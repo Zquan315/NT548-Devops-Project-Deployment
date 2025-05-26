@@ -9,11 +9,6 @@ variable "versioning_enabled_value" {
   default     = true
 }
 
-variable "bucket_name_id_value" {
-  description = "The ID of the S3 bucket to apply versioning and public access block."
-  type        = string
-  
-}
 
 variable "block_public_acls" {
   description = "Block public ACLs for the S3 bucket."

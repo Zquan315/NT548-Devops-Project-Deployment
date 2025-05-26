@@ -62,11 +62,17 @@ s3_bucket_name_value = "nhom16-app-student-bucket-22521190"
 ec2_role_name_value = "nhom16_ec2_role"
 code_deploy_role_name_value = "nhom16_codeDeploy_role"
 nhom16_user_name_value = "nhom16_user"
-
+readonly_policy_arn_value = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
+ec2_code_deploy_policy_arn_value = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy"
+code_deploy_policy_arn_value = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
+admin_policy_arn_value = "arn:aws:iam::aws:policy/AdministratorAccess"
 # CodeCommit repository
 repository_name_value        = "nhom16-app-student-repo"
 repository_description_value = "Repository for Nhom16 App Student"
-# # EC2 instance
-# ami_id_value = "ami-0e449927258d45bc4" # amazon linux 2023 ami
-# instance_type_value = "t2.micro"
-# key_name_value = "virginia-key" # my key pair name
+
+# EC2 instance
+ami_id_value = "ami-0f9de6e2d2f067fca" # ubuntu 22.04 ami
+instance_type_value = "t3.medium" # t3.medium instance type
+key_name_value = "nhom16" # my key pair name
+volume_size_value = 20
+volume_type_value = "gp2" # General Purpose SSD (gp2) volume type

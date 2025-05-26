@@ -6,7 +6,7 @@ resource "aws_s3_bucket" "nhom16-app-student-bucket-22521190" {
 }
 
 resource "aws_s3_bucket_versioning" "nhom16-app-student-buckett-versioning" {
-    bucket = var.bucket_name_id_value
+    bucket = aws_s3_bucket.nhom16-app-student-bucket-22521190.id
     versioning_configuration {
         status = var.versioning_enabled_value ? "Enabled" : "Suspended"
     }

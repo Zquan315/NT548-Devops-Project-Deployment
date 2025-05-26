@@ -14,3 +14,21 @@ variable "nhom16_user_name" {
   type        = string
   
 }
+
+variable "readonly_policy_arn" {
+  description = "ARN of the read-only policy for S3"
+  type        = string
+}
+variable "ec2_code_deploy_policy_arn" {
+  description = "ARN of the CodeDeploy policy for EC2 instances"
+  type        = string
+}
+variable "code_deploy_policy_arn" {
+  description = "ARN of the CodeDeploy policy for CodeDeploy role"
+  type        = string
+}
+variable "admin_policy_arn" {
+  description = "ARN of the admin policy for IAM user"
+  type        = string
+  
+}

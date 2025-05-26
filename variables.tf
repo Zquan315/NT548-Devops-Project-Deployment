@@ -105,19 +105,45 @@ variable "repository_description_value" {
   type        = string
 }
 
-# # variables for ec2 instance
-# variable "ami_id_value" {
-#   type        = string
-#   description = "AMI ID cho EC2 instance (Amazon Linux 2, Ubuntu v.v)"
-# }
+variable "readonly_policy_arn_value" {
+  description = "ARN of the read-only policy for S3"
+  type        = string
+}
+variable "ec2_code_deploy_policy_arn_value" {
+  description = "ARN of the CodeDeploy policy for EC2 instances"
+  type        = string
+}
+variable "code_deploy_policy_arn_value" {
+  description = "ARN of the CodeDeploy policy for CodeDeploy role"
+  type        = string
+}
 
-# variable "key_name_value" {
-#   type        = string
-#   description = "The name of the SSH key used to log in to EC2 instances."
-# }
+variable "admin_policy_arn_value" {
+  description = "ARN of the admin policy for IAM user"
+  type        = string
+}
 
-# variable "instance_type_value" {
-#   description = "EC2 instance type"
-#   type        = string
-# }
+# variables for ec2 instance
+variable "ami_id_value" {
+  type        = string
+  description = "AMI ID cho EC2 instance (Amazon Linux 2, Ubuntu v.v)"
+}
 
+variable "key_name_value" {
+  type        = string
+  description = "The name of the SSH key used to log in to EC2 instances."
+}
+
+variable "instance_type_value" {
+  description = "EC2 instance type"
+  type        = string
+}
+
+variable "volume_size_value" {
+  description = "Size of the root volume in GB"
+  type        = number
+}
+variable "volume_type_value" {
+  description = "Type of the root volume"
+  type        = string
+}

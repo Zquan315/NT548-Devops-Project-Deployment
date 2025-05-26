@@ -8,15 +8,7 @@ variable "instance_type" {
   description = "EC2 instance type"
 }
 
-variable "subnet_id_private" {
-  type        = string
-  description = "The private subnet in which to launch the EC2 instance"
-}
 
-variable "security_group_id_private" {
-  type        = list(string)
-  description = "The security group ID associated with the EC2 instance"
-}
 
 variable "key_name" {
   type        = string
@@ -31,4 +23,30 @@ variable "subnet_id_public" {
 variable "security_group_id_public" {
   type        = list(string)
   description = "The security group ID associated with the EC2 instance"
+}
+
+variable "associate_public_ip_address" {
+  type        = bool
+  description = "Whether to associate a public IP address with the instance"
+  default     = true
+}
+
+variable "region_network_border_group" {
+  description = "The network border group for the Elastic IP address."
+  type        = string
+}
+
+variable "ec2_instance_profile_name" {
+  description = "The name of the IAM instance profile to associate with the EC2 instance"
+  type        = string
+}
+
+variable "volume_size" {
+  description = "Size of the root volume in GB"
+  type        = number
+}
+
+variable "volume_type" {
+  description = "Type of the root volume"
+  type        = string
 }
