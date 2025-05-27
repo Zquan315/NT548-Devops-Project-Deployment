@@ -30,10 +30,10 @@ module "route_table_module" {
                                     module.vpc_module.nhom16_subnet_private_ids[1]]
 
   # Route Table Public
-  destination_cidr_block_public = var.destination_cidr_block_public_value
-  gateway_id_public             = module.vpc_module.nhom16_internet_gateway_id
-  subnet_id_public              = [module.vpc_module.nhom16_subnet_public_ids[0], 
-                                  module.vpc_module.nhom16_subnet_public_ids[1]]
+  destination_cidr_block_public  = var.destination_cidr_block_public_value
+  gateway_id_public              = module.vpc_module.nhom16_internet_gateway_id
+  subnet_id_public               = [module.vpc_module.nhom16_subnet_public_ids[0], 
+                                   module.vpc_module.nhom16_subnet_public_ids[1]]
 }
 
 # Create Security Groups
@@ -66,6 +66,8 @@ module "iam_module" {
   ec2_code_deploy_policy_arn = var.ec2_code_deploy_policy_arn_value
   code_deploy_policy_arn     = var.code_deploy_policy_arn_value
   admin_policy_arn           = var.admin_policy_arn_value
+  codebuild_role_name        = var.codebuild_role_name_value
+  code_build_dev_access_policy_arn = var.code_build_dev_access_policy_arn_value
   # IAM User
   nhom16_user_name           = var.nhom16_user_name_value
 }
@@ -104,4 +106,13 @@ module "codeDeploy_module" {
   code_deploy_role_arn        = module.iam_module.nhom16_codeDeploy_role_arn
   ec2_tag_value               = var.ec2_tag_name_value
   deployment_option           = var.deployment_option_value
+}
+
+# Create CodeBuild project
+module "codeBuild_module" {
+  source = "./modules/codeBuild_module"
+  project_name                     = var.code_build_project_name_value
+  service_role_arn                 = module.iam_module.nhom16_codebuild_role_arn
+  s3_bucket                        = module.s3_module.nhom16-app_student_bucket_bucket 
+  codecommit_repo_name             = module.codeCommit_module.nhom16_app_student_repository_name   
 }

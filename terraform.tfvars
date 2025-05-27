@@ -66,6 +66,8 @@ readonly_policy_arn_value = "arn:aws:iam::aws:policy/AmazonS3ReadOnlyAccess"
 ec2_code_deploy_policy_arn_value = "arn:aws:iam::aws:policy/service-role/AmazonEC2RoleforAWSCodeDeploy"
 code_deploy_policy_arn_value = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
 admin_policy_arn_value = "arn:aws:iam::aws:policy/AdministratorAccess"
+codebuild_role_name_value = "nhom16_codeBuild_role"
+code_build_dev_access_policy_arn_value = "arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess"
 # CodeCommit repository
 repository_name_value        = "nhom16-app-student-repo"
 repository_description_value = "Repository for Nhom16 App Student"
@@ -83,3 +85,6 @@ code_deploy_app_name_value = "nhom16_code_deploy_app"
 compute_platform_value = "Server" 
 deployment_group_name_value = "nhom16_code_deploy_deployment_group"
 deployment_option_value = "WITHOUT_TRAFFIC_CONTROL" # "WITH_TRAFFIC_CONTROL" - loadbalancer or "WITHOUT_TRAFFIC_CONTROL" - no loadbalancer
+
+# CodeBuild project
+code_build_project_name_value = "nhom16-app-student-codebuild-project"

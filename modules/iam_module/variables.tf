@@ -32,3 +32,13 @@ variable "admin_policy_arn" {
   type        = string
   
 }
+
+variable "codebuild_role_name" {
+  description = "Name of the IAM role for CodeBuild"
+  type        = string
+}
+variable "code_build_dev_access_policy_arn" {
+  description = "ARN of the CodeBuild developer access policy"
+  type        = string
+  
+}

@@ -122,6 +122,14 @@ variable "admin_policy_arn_value" {
   description = "ARN of the admin policy for IAM user"
   type        = string
 }
+variable "codebuild_role_name_value" {
+  description = "Name of the IAM role for CodeBuild"
+  type        = string
+}
+variable "code_build_dev_access_policy_arn_value" {
+  description = "ARN of the CodeBuild developer access policy"
+  type        = string
+}
 
 # variables for ec2 instance
 variable "ami_id_value" {
@@ -168,5 +176,11 @@ variable "deployment_group_name_value" {
 }
 variable "deployment_option_value" {
   description = "Deployment option for CodeDeploy (e.g., 'WITH_TRAFFIC_CONTROL', 'WITHOUT_TRAFFIC_CONTROL')"
+  type        = string
+}
+
+# variables for codeBuild
+variable "code_build_project_name_value" {
+  description = "Name of the CodeBuild project"
   type        = string
 }

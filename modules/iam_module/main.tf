@@ -75,3 +75,28 @@ resource "aws_iam_user_policy_attachment" "nhom16_user_policy_attachment_admin" 
     user       = aws_iam_user.nhom16_user.name
     policy_arn = var.admin_policy_arn
 }
+
+# create role for code build
+resource "aws_iam_role" "nhom16_codeBuild_role" {
+    name = var.codebuild_role_name
+    assume_role_policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                "Effect": "Allow",
+                "Action": [
+                    "sts:AssumeRole"
+                ],
+                "Principal": {
+                    "Service": [
+                        "codebuild.amazonaws.com"
+                    ]
+                }
+            }
+        ]
+    })
+}
+resource "aws_iam_role_policy_attachment" "nhom16_codeBuild_role_policy_attachment" {
+    role       = aws_iam_role.nhom16_codeBuild_role.name
+    policy_arn = var.code_build_dev_access_policy_arn
+}

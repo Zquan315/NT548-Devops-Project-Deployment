@@ -8,3 +8,9 @@ output "nhom16-app_student_bucket_arn" {
   value       = aws_s3_bucket.nhom16-app-student-bucket-22521190.arn
   
 }
+
+output "nhom16-app_student_bucket_bucket" {
+  description = "The domain name of the S3 bucket created by the module."
+  value       = aws_s3_bucket.nhom16-app-student-bucket-22521190.bucket
+  
+}

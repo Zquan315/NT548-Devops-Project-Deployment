@@ -22,3 +22,8 @@ output "nhom16_instance_profile_name" {
   description = "The name of the IAM instance profile created by the module."
   value       = aws_iam_instance_profile.nhom16_instance_profile.name
 }
+
+output "nhom16_codebuild_role_arn" {
+  description = "The ARN of the CodeBuild IAM role created by the module."
+  value       = aws_iam_role.nhom16_codeBuild_role.arn
+}
