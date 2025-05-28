@@ -19,15 +19,14 @@
   terraform apply
   ```
   
-- Vào IAM -> user được tạo (nhom16-user), vào tab Credentials tạo một Credentials ở tab HTTPS Git credentials for AWS CodeCommit
-- Vào code commit clone code về, sau đó paste mã nguồn từ [Mã nguồn](https://github.com/Zquan315/NT548-DevOps-Project), copy địa chỉ ip public của EC2 dán vào /client/.env
+- Vào IAM -> user được tạo (nhom16-user), vào tab Credentials tạo một Credentials ở tab HTTPS Git credentials for AWS CodeCommit và tải về
+- Vào code commit clone code về, khi đó sẽ có yêu cầu xác thực -> lấy user và password khi khi từ file credentials được tạo ở trên, sau đó paste mã nguồn từ [Mã nguồn](https://github.com/Zquan315/NT548-DevOps-Project), copy địa chỉ ip public của EC2 dán vào /client/.env
 
   ``` bash
   REACT_APP_API_URL=http://<ip_public>:5000
   ```
   
-- Sau đó push code lên. Khi clone về sẽ yêu cầu xác thực, mở file credentials vừa tạo để đăng nhập
-- Sau khi push code thành công, tiến hành tạo pipeline
+- Sau đó push code lên. Sau khi push code thành công, tiến hành tạo pipeline
 
   ``` bash
   cd ../create-pipeline
