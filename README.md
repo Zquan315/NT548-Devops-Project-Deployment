@@ -1,4 +1,4 @@
-# Deploy a Full-Stack React & NestJS Web Application using AWS CI/CD Pipeline Usong terraform
+# Deploy a Full-Stack React & NestJS Web Application using AWS CI/CD Pipeline Using Terraform
 
 ## Hướng dẫn chạy mã nguồn để thiết lập AWS CICD pipeline
 
