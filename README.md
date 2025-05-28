@@ -6,7 +6,7 @@
 - Tạo một S3 bucket để lưu state của workspace 1 - Infrastructure
   
   ``` bash
-  cd create-s3-tfstate
+  cd create-s3-tfstate-and-key-pair
   terraform init
   terraform apply
   ```
