@@ -3,22 +3,22 @@ variable "pipeline_name" {
   type        = string
 }
 
-variable "pipeline_role_arn" {
+variable "role_arn" {
   description = "The ARN of the IAM role for CodePipeline"
   type        = string
 }
 
-variable "artifact_bucket_name" {
+variable "s3_bucket" {
   description = "The name of the S3 bucket to store pipeline artifacts"
   type        = string
 }
 
-variable "kms_key_arn" {
-  description = "The ARN of the KMS key for artifact encryption"
-  type        = string
-}
+# variable "kms_key_arn" {
+#   description = "The ARN of the KMS key for artifact encryption"
+#   type        = string
+# }
 
-variable "repository_id" {
+variable "repository_name" {
   description = "The name of the CodeCommit repository"
   type        = string
 }
@@ -38,8 +38,3 @@ variable "deployment_group_name" {
   type        = string
 }
 
-variable "tags" {
-  description = "Tags to apply to the CodePipeline and associated resources"
-  type        = map(string)
-  default     = {}
-}

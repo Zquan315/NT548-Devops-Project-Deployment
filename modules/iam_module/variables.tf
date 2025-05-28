@@ -42,3 +42,12 @@ variable "code_build_dev_access_policy_arn" {
   type        = string
   
 }
+
+variable "code_pipeline_role_name" {
+  description = "Name of the IAM role for CodePipeline"
+  type        = string 
+}
+variable "code_pipeline_policy_arn_list" {
+  description = "ARN of the CodePipeline policy for the role"
+  type        = list(string)
+}

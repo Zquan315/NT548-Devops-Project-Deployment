@@ -1,5 +1,4 @@
 region_value  = "us-east-1"
-profile_value = "" #tài khoản ai người đó sử dụng 
 
 # VPC
 vpc_cidr_block_value         = "172.16.0.0/16"
@@ -67,7 +66,14 @@ ec2_code_deploy_policy_arn_value = "arn:aws:iam::aws:policy/service-role/AmazonE
 code_deploy_policy_arn_value = "arn:aws:iam::aws:policy/service-role/AWSCodeDeployRole"
 admin_policy_arn_value = "arn:aws:iam::aws:policy/AdministratorAccess"
 codebuild_role_name_value = "nhom16_codeBuild_role"
-code_build_dev_access_policy_arn_value = "arn:aws:iam::aws:policy/AWSCodeBuildDeveloperAccess"
+code_build_dev_access_policy_arn_value = "arn:aws:iam::aws:policy/AWSCodeBuildAdminAccess"
+code_pipeline_role_name_value = "nhom16_codePipeline_role"
+code_code_pipeline_policy_arn_list_value = [
+  "arn:aws:iam::aws:policy/AmazonS3FullAccess",
+  "arn:aws:iam::aws:policy/AWSCodeCommitFullAccess",
+  "arn:aws:iam::aws:policy/AWSCodeBuildAdminAccess",
+  "arn:aws:iam::aws:policy/AWSCodeDeployFullAccess", 
+]
 # CodeCommit repository
 repository_name_value        = "nhom16-app-student-repo"
 repository_description_value = "Repository for Nhom16 App Student"
@@ -79,12 +85,3 @@ key_name_value = "nhom16" # my key pair name
 volume_size_value = 20
 volume_type_value = "gp2" # General Purpose SSD (gp2) volume type
 ec2_tag_name_value = "nhom16_ec2_public"
-
-# CodeDeploy application and deployment group
-code_deploy_app_name_value = "nhom16_code_deploy_app"
-compute_platform_value = "Server" 
-deployment_group_name_value = "nhom16_code_deploy_deployment_group"
-deployment_option_value = "WITHOUT_TRAFFIC_CONTROL" # "WITH_TRAFFIC_CONTROL" - loadbalancer or "WITHOUT_TRAFFIC_CONTROL" - no loadbalancer
-
-# CodeBuild project
-code_build_project_name_value = "nhom16-app-student-codebuild-project"

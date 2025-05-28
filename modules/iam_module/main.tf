@@ -100,3 +100,78 @@ resource "aws_iam_role_policy_attachment" "nhom16_codeBuild_role_policy_attachme
     role       = aws_iam_role.nhom16_codeBuild_role.name
     policy_arn = var.code_build_dev_access_policy_arn
 }
+
+resource "aws_iam_role_policy" "codebuild_cloudwatch_policy" {
+  name = "CodeBuildCloudWatchPolicy"
+  role = aws_iam_role.nhom16_codeBuild_role.name
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = [
+          "*"
+        ]
+      }
+    ]
+  })
+}
+
+resource "aws_iam_role_policy" "codebuild_S3_policy" {
+  name = "CodeBuildS3Policy"
+  role = aws_iam_role.nhom16_codeBuild_role.name
+  policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect = "Allow"
+                Action = [
+                    "s3:GetObject",
+                    "s3:GetObjectVersion",
+                    "s3:PutObject"
+                ],
+                Resource = "*"
+                    
+            },
+            {
+                Effect = "Allow"
+                Action = [
+                    "s3:ListBucket"
+                ]
+                Resource = "*"
+            }
+        ]
+    })
+}
+
+# codepipeline role
+resource "aws_iam_role" "nhom16_codePipeline_role" {
+    name = var.code_pipeline_role_name
+    assume_role_policy = jsonencode({
+        Version = "2012-10-17"
+        Statement = [
+            {
+                Effect = "Allow",
+                Action = [
+                    "sts:AssumeRole"
+                ],
+                Principal = {
+                    Service = [
+                        "codepipeline.amazonaws.com"
+                    ]
+                }
+            }
+        ]
+    })
+}
+
+resource "aws_iam_role_policy_attachment" "nhom16_codePipeline_role_policy_attachment" {
+    role       = aws_iam_role.nhom16_codePipeline_role.name
+    for_each   = toset(var.code_pipeline_policy_arn_list)
+    policy_arn = each.value
+}

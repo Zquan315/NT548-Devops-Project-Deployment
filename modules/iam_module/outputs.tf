@@ -27,3 +27,9 @@ output "nhom16_codebuild_role_arn" {
   description = "The ARN of the CodeBuild IAM role created by the module."
   value       = aws_iam_role.nhom16_codeBuild_role.arn
 }
+
+output "nhom16_code_pipeline_role_arn" {
+  description = "The ARN of the CodePipeline IAM role created by the module."
+  value       = aws_iam_role.nhom16_codePipeline_role.arn
+  
+}

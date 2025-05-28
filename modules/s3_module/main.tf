@@ -1,5 +1,6 @@
 resource "aws_s3_bucket" "nhom16-app-student-bucket-22521190" {
     bucket = var.bucket_name_value
+    force_destroy = true
     tags = {
         Name = var.bucket_name_value
     }

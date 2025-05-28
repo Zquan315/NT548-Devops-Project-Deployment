@@ -1,6 +1,6 @@
 # create VPC and subnets
 module "vpc_module" {
-  source = "./modules/vpc_module"
+  source = "../modules/vpc_module"
   #VPC
   cidr_block_value         = var.vpc_cidr_block_value
   cidr_block_private_value = var.vpc_cidr_block_private_value
@@ -10,7 +10,7 @@ module "vpc_module" {
 
 # Create Nat Gateway
 module "nat_gateway_module" {
-  source = "./modules/nat_gateway_module"
+  source = "../modules/nat_gateway_module"
   region_network_border_group = var.region_value
   # NAT Gateway
   nat_gateway_subnet_id       = module.vpc_module.nhom16_subnet_public_ids[0]
@@ -18,7 +18,7 @@ module "nat_gateway_module" {
 
 # create route table
 module "route_table_module" {
-  source = "./modules/route_table_module"
+  source = "../modules/route_table_module"
 
   # Route Table
   vpc_id_value = module.vpc_module.nhom16_vpc_id
@@ -38,7 +38,7 @@ module "route_table_module" {
 
 # Create Security Groups
 module "security_group_module" {
-  source = "./modules/security_group_module"
+  source = "../modules/security_group_module"
   vpc_id = module.vpc_module.nhom16_vpc_id
   # Security Group Private ingress
 
@@ -53,35 +53,37 @@ module "security_group_module" {
 
 # Create S3 bucket
 module "s3_module" {
-  source = "./modules/s3_module"
+  source = "../modules/s3_module"
   bucket_name_value         = var.s3_bucket_name_value
 }
 
 # Create IAM 
 module "iam_module" {
-  source                     = "./modules/iam_module"
-  ec2_role_name              = var.ec2_role_name_value
-  code_deploy_role_name      = var.code_deploy_role_name_value
-  readonly_policy_arn        = var.readonly_policy_arn_value
-  ec2_code_deploy_policy_arn = var.ec2_code_deploy_policy_arn_value
-  code_deploy_policy_arn     = var.code_deploy_policy_arn_value
-  admin_policy_arn           = var.admin_policy_arn_value
-  codebuild_role_name        = var.codebuild_role_name_value
-  code_build_dev_access_policy_arn = var.code_build_dev_access_policy_arn_value
+  source                             = "../modules/iam_module"
+  ec2_role_name                      = var.ec2_role_name_value
+  code_deploy_role_name              = var.code_deploy_role_name_value
+  readonly_policy_arn                = var.readonly_policy_arn_value
+  ec2_code_deploy_policy_arn         = var.ec2_code_deploy_policy_arn_value
+  code_deploy_policy_arn             = var.code_deploy_policy_arn_value
+  admin_policy_arn                   = var.admin_policy_arn_value
+  codebuild_role_name                = var.codebuild_role_name_value
+  code_build_dev_access_policy_arn   = var.code_build_dev_access_policy_arn_value
+  code_pipeline_role_name            = var.code_pipeline_role_name_value
+  code_pipeline_policy_arn_list      = var.code_code_pipeline_policy_arn_list_value  
   # IAM User
-  nhom16_user_name           = var.nhom16_user_name_value
+  nhom16_user_name                   = var.nhom16_user_name_value
 }
 
 # Create CodeCommit repository
 module "codeCommit_module" {
-  source = "./modules/codeCommit_module"
+  source = "../modules/codeCommit_module"
   repository_name        = var.repository_name_value
   repository_description = var.repository_description_value
 }
 
 # Create EC2 instances
 module "ec2_instance_module" {
-  source                               = "./modules/ec2_module"
+  source                               = "../modules/ec2_module"
   ami_id                               = var.ami_id_value
   instance_type                        = var.instance_type_value
   key_name                             = var.key_name_value
@@ -97,22 +99,10 @@ module "ec2_instance_module" {
   region_network_border_group = var.region_value
 }
 
-# Create CodeDeploy application and deployment group
-module "codeDeploy_module" {
-  source = "./modules/codeDeploy_module"
-  code_deploy_app_name        = var.code_deploy_app_name_value
-  compute_platform            = var.compute_platform_value
-  deployment_group_name       = var.deployment_group_name_value
-  code_deploy_role_arn        = module.iam_module.nhom16_codeDeploy_role_arn
-  ec2_tag_value               = var.ec2_tag_name_value
-  deployment_option           = var.deployment_option_value
-}
-
-# Create CodeBuild project
-module "codeBuild_module" {
-  source = "./modules/codeBuild_module"
-  project_name                     = var.code_build_project_name_value
-  service_role_arn                 = module.iam_module.nhom16_codebuild_role_arn
-  s3_bucket                        = module.s3_module.nhom16-app_student_bucket_bucket 
-  codecommit_repo_name             = module.codeCommit_module.nhom16_app_student_repository_name   
+terraform {
+  backend "s3" {
+    bucket         = "nhom16-terraform-state-bucket" 
+    key            = "create-infrastructure/terraform.tfstate"
+    region         = "us-east-1" 
+  }
 }

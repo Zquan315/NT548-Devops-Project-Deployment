@@ -1,16 +1,16 @@
-resource "aws_codepipeline" "nhom16_app_student_pipeline" {
+resource "aws_codepipeline" "nhom16_app_student_codePipeline" {
   name     = var.pipeline_name
-  role_arn = aws_iam_role.codepipeline_role.arn
-  execution_mode = "QUEUED"
+  role_arn = var.role_arn
+  execution_mode = "SUPERSEDED"
 
   artifact_store {
-    location = aws_s3_bucket.artifact_bucket.bucket
+    location = var.s3_bucket
     type     = "S3"
 
-    encryption_key {
-      id   = var.kms_key_arn
-      type = "KMS"
-    }
+    # encryption_key {
+    #   id   = var.kms_key_arn
+    #   type = "KMS"
+    # }
   }
 
   stage {
@@ -25,7 +25,7 @@ resource "aws_codepipeline" "nhom16_app_student_pipeline" {
       output_artifacts = ["SourceArtifact"]  # default CodePipeline output artifact
 
       configuration = {
-        RepositoryName       = var.repository_id
+        RepositoryName       = var.repository_name
         BranchName           = "master"
         PollForSourceChanges = true
       }
@@ -34,7 +34,6 @@ resource "aws_codepipeline" "nhom16_app_student_pipeline" {
 
   stage {
     name = "Build"
-
     action {
       name             = "Build"
       category         = "Build"
@@ -43,7 +42,6 @@ resource "aws_codepipeline" "nhom16_app_student_pipeline" {
       input_artifacts  = ["SourceArtifact"]
       output_artifacts = ["BuildArtifact"]
       version          = "1"
-
       configuration = {
         ProjectName = var.build_project_name
       }
@@ -67,6 +65,4 @@ resource "aws_codepipeline" "nhom16_app_student_pipeline" {
       }
     }
   }
-
-  tags = var.tags
 }
