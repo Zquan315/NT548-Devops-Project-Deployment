@@ -34,4 +34,4 @@
   terraform apply
   ```
   
-- Đợi pipeline chạy thành công, truy cập <ip_public>:3000 để hiển thị trang web. Server <ip_public>:5000/students
+- Đợi pipeline chạy thành công, truy cập http://nhom16-alb-594249954.us-east-1.elb.amazonaws.com để hiển thị trang web. Server http://nhom16-alb-594249954.us-east-1.elb.amazonaws.com/students
