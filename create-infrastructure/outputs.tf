@@ -17,3 +17,11 @@ output "nhom16_app_student_repository_name" {
 output "nhom16_code_pipeline_role_arn" {
   value = module.iam_module.nhom16_code_pipeline_role_arn
 }
+
+output "nhom16_asg_name" {
+  value = module.asg_module.nhom16_asg_name
+}
+
+output "nhom16_tg_backend_name" {
+  value = module.alb_module.nhom16_tg_backend_name
+}

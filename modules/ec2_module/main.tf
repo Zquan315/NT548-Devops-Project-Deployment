@@ -27,11 +27,11 @@ resource "aws_instance" "nhom16_ec2_public" {
           EOF
 }
 
-# Allocate an Elastic IP
-resource "aws_eip" "nhom16_eip" {
-    network_border_group = var.region_network_border_group
-    instance = aws_instance.nhom16_ec2_public.id
-    tags = {
-        Name = "nhom16_eip"
-    }
+resource "aws_ami_from_instance" "nhom16_ami" {
+  name               = "nhom16_ami"
+  description        = "AMI created from nhom16_ec2_public instance"
+  source_instance_id = aws_instance.nhom16_ec2_public.id
+  tags = {
+    Name = "nhom16_ami"
+  }
 }

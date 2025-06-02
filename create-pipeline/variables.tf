@@ -15,11 +15,6 @@ variable "deployment_option_value" {
   description = "Deployment option for CodeDeploy (e.g., 'WITH_TRAFFIC_CONTROL', 'WITHOUT_TRAFFIC_CONTROL')"
   type        = string
 }
-variable "ec2_tag_name_value" {
-  description = "Tag name for EC2 instances in the deployment group"
-  type        = string
-  
-}
 
 # variables for codeBuild
 variable "code_build_project_name_value" {

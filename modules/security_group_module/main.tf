@@ -42,3 +42,21 @@ resource "aws_security_group" "nhom16_security_group_private" {
   }
 }
 
+resource "aws_security_group" "nhom16_sg_alb" {
+  vpc_id = var.vpc_id
+  name   = "nhom16-sg-alb"
+
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+}

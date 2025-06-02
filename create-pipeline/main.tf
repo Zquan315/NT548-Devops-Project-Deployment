@@ -15,8 +15,9 @@ module "codeDeploy_module" {
   compute_platform            = var.compute_platform_value
   deployment_group_name       = var.deployment_group_name_value
   code_deploy_role_arn        = data.terraform_remote_state.infra.outputs.nhom16_codeDeploy_role_arn
-  ec2_tag_value               = var.ec2_tag_name_value
   deployment_option           = var.deployment_option_value
+  autoscaling_groups          = [data.terraform_remote_state.infra.outputs.nhom16_asg_name]
+  target_group_name           = data.terraform_remote_state.infra.outputs.nhom16_tg_backend_name
 }
 
 # Create CodeBuild project

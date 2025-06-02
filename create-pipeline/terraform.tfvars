@@ -2,8 +2,7 @@
 code_deploy_app_name_value = "nhom16_code_deploy_app"
 compute_platform_value = "Server" 
 deployment_group_name_value = "nhom16_code_deploy_deployment_group"
-deployment_option_value = "WITHOUT_TRAFFIC_CONTROL" # "WITH_TRAFFIC_CONTROL" - loadbalancer or "WITHOUT_TRAFFIC_CONTROL" - no loadbalancer
-ec2_tag_name_value = "nhom16_ec2_public"
+deployment_option_value = "WITH_TRAFFIC_CONTROL" # "WITH_TRAFFIC_CONTROL" - loadbalancer or "WITHOUT_TRAFFIC_CONTROL" - no loadbalancer
 # CodeBuild project
 code_build_project_name_value = "nhom16-app-student-codebuild-project"
 

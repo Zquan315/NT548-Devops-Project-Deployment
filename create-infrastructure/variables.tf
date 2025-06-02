@@ -127,36 +127,58 @@ variable "code_build_dev_access_policy_arn_value" {
   type        = string
 }
 
-# variables for ec2 instance
+# variables for alb
+variable "load_balancer_type_value" {
+  description = "Type of the load balancer (e.g., application, network)"
+  type        = string
+}
+variable "frontend_port_value" {
+  description = "Port for the frontend target group"
+  type        = number
+}
+variable "backend_port_value" {
+  description = "Port for the backend target group"
+  type        = number
+}
+variable "http_port_value" {
+  description = "HTTP port for the Application Load Balancer"
+  type        = number
+}
+
+# variables for autoscaling group
 variable "ami_id_value" {
+  description = "AMI ID for the EC2 instances"
   type        = string
-  description = "AMI ID cho EC2 instance (Amazon Linux 2, Ubuntu v.v)"
 }
-
-variable "key_name_value" {
-  type        = string
-  description = "The name of the SSH key used to log in to EC2 instances."
-}
-
 variable "instance_type_value" {
-  description = "EC2 instance type"
+  description = "Instance type for the EC2 instances"
+  type        = string
+}
+variable "key_name_value" {
+  description = "Key pair name for SSH access to the EC2 instances"
   type        = string
 }
 
 variable "volume_size_value" {
-  description = "Size of the root volume in GB"
+  description = "Size of the EBS volume in GB"
   type        = number
 }
 variable "volume_type_value" {
-  description = "Type of the root volume"
+  description = "Type of the EBS volume (e.g., gp2, io1)"
   type        = string
 }
-
-variable "ec2_tag_name_value" {
-  description = "Tag name for the EC2 instance"
-  type        = string 
+variable "desired_capacity_value" {
+  description = "Desired capacity for the Auto Scaling group"
+  type        = number
 }
-
+variable "min_size_value" {
+  description = "Minimum size for the Auto Scaling group"
+  type        = number
+}
+variable "max_size_value" {
+  description = "Maximum size for the Auto Scaling group"
+  type        = number
+}
 
 # variables for codePipeline
 variable "code_pipeline_role_name_value" {

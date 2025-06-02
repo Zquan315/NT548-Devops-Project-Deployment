@@ -17,8 +17,7 @@ protocol_in_private_value  = "tcp"
 
 #security group public
 ingress_rules_public_value = [
-  {
-    from_port   = 22
+  { from_port   = 22
     to_port     = 22
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
@@ -78,10 +77,18 @@ code_code_pipeline_policy_arn_list_value = [
 repository_name_value        = "nhom16-app-student-repo"
 repository_description_value = "Repository for Nhom16 App Student"
 
-# EC2 instance
+#load balancer
+load_balancer_type_value = "application" # Application Load Balancer
+frontend_port_value = 3000 # Frontend port for the target group
+backend_port_value = 5000 # Backend port for the target group
+http_port_value = 80 # HTTP port for the Application Load Balancer
+
+# auto scaling group
 ami_id_value = "ami-0f9de6e2d2f067fca" # ubuntu 22.04 ami
 instance_type_value = "t3.medium" # t3.medium instance type
 key_name_value = "nhom16" # my key pair name
 volume_size_value = 20
 volume_type_value = "gp2" # General Purpose SSD (gp2) volume type
-ec2_tag_name_value = "nhom16_ec2_public"
+desired_capacity_value = 2
+min_size_value = 2
+max_size_value = 4

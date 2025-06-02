@@ -8,8 +8,6 @@ variable "instance_type" {
   description = "EC2 instance type"
 }
 
-
-
 variable "key_name" {
   type        = string
   description = "The name of the SSH key pair used to connect"
@@ -31,10 +29,6 @@ variable "associate_public_ip_address" {
   default     = true
 }
 
-variable "region_network_border_group" {
-  description = "The network border group for the Elastic IP address."
-  type        = string
-}
 
 variable "ec2_instance_profile_name" {
   description = "The name of the IAM instance profile to associate with the EC2 instance"

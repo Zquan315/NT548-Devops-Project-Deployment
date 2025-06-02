@@ -13,19 +13,16 @@ resource "aws_codedeploy_deployment_group" "nhom16_code_deploy_deployment_group"
         deployment_option = var.deployment_option
     }
     
-    ec2_tag_filter {
-        key   = "Name"
-        value = var.ec2_tag_value
-        type  = "KEY_AND_VALUE"
-    }
+    autoscaling_groups = var.autoscaling_groups
+
 
     deployment_config_name = "CodeDeployDefault.OneAtATime"
     
-    # load_balancer_info {
-    #     elb_info {
-    #     name = var.elb_name
-    #     }
-    # }
+    load_balancer_info {
+        target_group_info {
+            name = var.target_group_name
+        }
+    }
 
     auto_rollback_configuration {
         enabled = true

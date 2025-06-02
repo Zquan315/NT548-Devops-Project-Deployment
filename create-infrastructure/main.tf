@@ -81,22 +81,35 @@ module "codeCommit_module" {
   repository_description = var.repository_description_value
 }
 
-# Create EC2 instances
-module "ec2_instance_module" {
-  source                               = "../modules/ec2_module"
-  ami_id                               = var.ami_id_value
-  instance_type                        = var.instance_type_value
-  key_name                             = var.key_name_value
-  ec2_instance_profile_name            = module.iam_module.nhom16_instance_profile_name
+# Create ALB and Target Groups 
+module "alb_module" {
+  source = "../modules/alb_module"
+  load_balancer_type    = var.load_balancer_type_value
+  alb_security_group_id = [module.security_group_module.nhom16_sg_alb_id]
+  public_subnet_ids     = module.vpc_module.nhom16_subnet_public_ids
+  vpc_id                = module.vpc_module.nhom16_vpc_id
+  frontend_port         = var.frontend_port_value
+  backend_port          = var.backend_port_value
+  http_port             = var.http_port_value
+}
 
-  # EC2 Public Instance
-  subnet_id_public            = module.vpc_module.nhom16_subnet_public_ids[0]
-  security_group_id_public    = [module.security_group_module.nhom16_security_group_public_id]
-  volume_size                 = var.volume_size_value
-  volume_type                 = var.volume_type_value 
-  ec2_tag_name                = var.ec2_tag_name_value 
-  # eip
-  region_network_border_group = var.region_value
+# create auto scaling group
+module "asg_module" {
+  source = "../modules/asg_module"
+  ami_id                    = var.ami_id_value
+  instance_type             = var.instance_type_value
+  key_name                  = var.key_name_value
+  ec2_instance_profile_name = module.iam_module.nhom16_instance_profile_name
+  subnet_id_public          = module.vpc_module.nhom16_subnet_public_ids[0]
+  security_group_id_public  = [module.security_group_module.nhom16_security_group_public_id]
+  volume_size               = var.volume_size_value
+  volume_type               = var.volume_type_value
+  desired_capacity          = var.desired_capacity_value
+  min_size                  = var.min_size_value
+  max_size                  = var.max_size_value
+  subnet_ids                = module.vpc_module.nhom16_subnet_public_ids
+  target_group_arns         = [module.alb_module.nhom16_tg_frontend_arn, 
+                                module.alb_module.nhom16_tg_backend_arn]  
 }
 
 terraform {

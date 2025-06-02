@@ -67,6 +67,35 @@ resource "aws_iam_policy_attachment" "codeDeploy_role_policy_attachment_codedepl
     policy_arn = var.code_deploy_policy_arn
 }
 
+resource "aws_iam_role_policy" "nhom16_codedeploy_policy" {
+  name = "nhom16-codedeploy-policy"
+  role = aws_iam_role.nhom16_codeDeploy_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "codedeploy:*",
+          "s3:GetObject",
+          "s3:GetObjectVersion",
+          "s3:ListObjects",
+          "ec2:DescribeInstances",
+          "elasticloadbalancing:DescribeTargetHealth",
+          "elasticloadbalancing:DescribeTargetGroups",
+          "autoscaling:DescribeAutoScalingGroups",
+          "autoscaling:DescribeAutoScalingInstances",
+          "autoscaling:UpdateAutoScalingGroup",
+          "autoscaling:CompleteLifecycleAction",
+          "autoscaling:RecordLifecycleActionHeartbeat"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
 # create a user
 resource "aws_iam_user" "nhom16_user" {
     name = var.nhom16_user_name
