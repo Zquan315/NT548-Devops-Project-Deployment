@@ -25,5 +25,5 @@ resource "aws_s3_bucket_public_access_block" "nhom16-app-student-buckett-public-
 
 resource "aws_key_pair" "nhom16" {
     key_name   = "nhom16"
-    public_key = file("~/.ssh/id_rsa.pub")
+    public_key = file("${path.module}/nhom16.pub")
 }
