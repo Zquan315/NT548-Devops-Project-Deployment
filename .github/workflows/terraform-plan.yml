@@ -31,7 +31,6 @@ jobs:
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: 1.5.7
-      
 
       # creart pipeline
       - name: Terraform Init for creating pipeline
