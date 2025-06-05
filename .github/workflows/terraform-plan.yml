@@ -32,40 +32,6 @@ jobs:
         with:
           terraform_version: 1.5.7
 
-      # create tfstate file in S3 bucket and key 
-      - name: Terraform Init for createing S3 tfstate and key pair
-        run: terraform init
-        working-directory: ./create-s3-tfstate-and-key-pair
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
-      
-      - name: Terraform Plan for createing S3 tfstate and key pair
-        run: terraform plan
-        working-directory: ./create-s3-tfstate-and-key-pair
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
-
-      # create infrastructure
-      - name: Terraform Init for creating infrastructure
-        run: terraform init
-        working-directory: ./create-infrastructure
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
-
-      - name: Terraform Plan for creating infrastructure
-        run: terraform plan
-        working-directory: ./create-infrastructure
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: us-east-1
-
       # creart pipeline
       - name: Terraform Init for creating pipeline
         run: terraform init
