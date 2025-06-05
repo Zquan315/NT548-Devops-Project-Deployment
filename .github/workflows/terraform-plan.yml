@@ -9,7 +9,7 @@ on:
 
 jobs:
   terraform:
-    name: 'Nhom 16 Terraform Plan'
+    name: 'Nhom16 Terraform Plan'
     runs-on: ubuntu-latest
 
     steps:
