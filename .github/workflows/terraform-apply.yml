@@ -1,0 +1,68 @@
+name: 'Nhom16 Terraform Apply tfstate & keypair'
+on:
+  workflow_dispatch:
+
+jobs:
+  terraform-apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+
+      - name: Write public key to file
+        run: echo "${{ secrets.NHOM16_PUBLIC_KEY }}" > ./create-s3-tfstate-and-key-pair/nhom16.pub
+
+      # create tfstate file in S3 bucket and key 
+      - name: Terraform Init for createing S3 tfstate and key pair
+        run: terraform init
+        working-directory: ./create-s3-tfstate-and-key-pair
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+      
+      - name: Terraform Plan for createing S3 tfstate and key pair
+        run: terraform plan
+        working-directory: ./create-s3-tfstate-and-key-pair
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+
+      - name: Terraform Apply for createing S3 tfstate and key pair
+        run: terraform apply -auto-approve
+        working-directory: ./create-s3-tfstate-and-key-pair
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+
+      # create infrastructure
+      - name: Terraform Init for creating infrastructure
+        run: terraform init
+        working-directory: ./create-infrastructure
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+
+      - name: Terraform Plan for creating infrastructure
+        run: terraform plan
+        working-directory: ./create-infrastructure
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+          
+      - name: Terraform Apply for creating infrastructure
+        run: terraform apply -auto-approve
+        working-directory: ./create-infrastructure
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
