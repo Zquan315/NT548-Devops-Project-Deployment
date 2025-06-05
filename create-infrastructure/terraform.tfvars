@@ -92,3 +92,7 @@ volume_type_value = "gp2" # General Purpose SSD (gp2) volume type
 desired_capacity_value = 2
 min_size_value = 2
 max_size_value = 4
+
+# route53
+nhom16_route53_zone_name_value = "nhom16.devops.uit"
+nhom16_route53_record_type_value = "A"

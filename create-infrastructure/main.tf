@@ -112,6 +112,16 @@ module "asg_module" {
                                 module.alb_module.nhom16_tg_backend_arn]  
 }
 
+module "route53_module" {
+  source = "../modules/route53_module"
+  # Route 53
+  nhom16_route53_zone_name            = var.nhom16_route53_zone_name_value
+  nhom16_route53_record_type          = var.nhom16_route53_record_type_value
+  nhom16_route53_record_alias_name    = module.alb_module.nhom16_alb_dns_name
+  nhom16_route53_record_alias_zone_id = module.alb_module.nhom16_alb_zone_id
+  
+}
+
 terraform {
   backend "s3" {
     bucket         = "nhom16-terraform-state-bucket" 

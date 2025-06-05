@@ -1,0 +1,84 @@
+name: 'Nhom16 Terraform Plan'
+on:
+  pull_request: 
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+jobs:
+  terraform:
+    name: 'Nhom 16 Terraform Plan'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout        
+        uses: actions/checkout@v4
+
+      # - name: Set up Python for Checkov
+      #   uses: actions/setup-python@v5
+      #   with:
+      #     python-version: '3.x'
+
+      # - name: Install Checkov
+      #   run: pip install checkov
+
+      # - name: Run Checkov scan
+      #   run: checkov -d ./Lab02
+
+      - name: set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.5.7
+
+      # create tfstate file in S3 bucket and key 
+      - name: Terraform Init for createing S3 tfstate and key pair
+        run: terraform init
+        working-directory: ./create-s3-tfstate-and-key-pair
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+      
+      - name: Terraform Plan for createing S3 tfstate and key pair
+        run: terraform plan
+        working-directory: ./create-s3-tfstate-and-key-pair
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+
+      # create infrastructure
+      - name: Terraform Init for creating infrastructure
+        run: terraform init
+        working-directory: ./create-infrastructure
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+
+      - name: Terraform Plan for creating infrastructure
+        run: terraform plan
+        working-directory: ./create-infrastructure
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+
+      # creart pipeline
+      - name: Terraform Init for creating pipeline
+        run: terraform init
+        working-directory: ./create-pipeline
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1
+
+      - name: Terraform Plan for creating pipeline
+        run: terraform plan
+        working-directory: ./create-pipeline
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: us-east-1

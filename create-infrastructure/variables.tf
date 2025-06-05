@@ -191,3 +191,13 @@ variable "code_code_pipeline_policy_arn_list_value" {
   description = "List of ARNs for the CodePipeline policies"
   type        = list(string)
 }
+
+# variables for route53
+variable "nhom16_route53_zone_name_value" {
+  description = "The name of the Route 53 hosted zone"
+  type        = string
+}
+variable "nhom16_route53_record_type_value" {
+  description = "The type of the Route 53 record (e.g., A, CNAME)"
+  type        = string
+}
